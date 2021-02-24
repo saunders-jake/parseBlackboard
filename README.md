@@ -6,5 +6,6 @@ This project also demonstrates my knowledge of the Object Oriented Programming p
 
 To do:
 
-[ ] Fix logs
-[ ] Fully comment out code
+- [ ] Fix logs
+
+- [ ] Fully comment out code
