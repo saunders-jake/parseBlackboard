@@ -96,6 +96,6 @@ test1.displayQuestionsAnswers()
 print(test1.questionTotal)
 print(Exam.questionTotal)
 
-    
+#note to self to fix logs, maybe define logs in the init funcition, then use self.logs?
 
 
