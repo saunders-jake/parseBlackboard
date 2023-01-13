@@ -1,9 +1,10 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 #from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup as BS
 
 class Exam:
-    def __init__(self, type = 1):
+    def __init__(self, type = 0):
         self.type = type
 
         if type == 1:
@@ -17,21 +18,23 @@ class Exam:
 
     def loadLivePage(self):
         self.options = webdriver.ChromeOptions()
-        options.add_experimental_option('excludeSwitches', ['enable-logging'])
-        self.driver = webdriver.Chrome(options=options)
+        #options.add_experimental_option('excludeSwitches', ['enable-logging'])
+        # self.driver = webdriver.Chrome(options=options)
+
+        self.driver = webdriver.Chrome()
 
         # Opens the Blackboard website
-        driver.get("https://ucmo.blackboard.com")
+        self.driver.get("https://ucmo.blackboard.com")
 
         # Waits for user to navigate to the correct webpage, cba to automate this atm
         self.cont = input("Once you have loaded the exam, Press [ENTER]")
 
         #Stores handle # of the new Test window and switches to it
-        testWindow = driver.window_handles[1]
-        driver.switch_to.window(testWindow)
+        testWindow = self.driver.window_handles[1]
+        self.driver.switch_to.window(testWindow)
         
         # Creates a Beautiful Soup object of the Test webpage
-        return BS(driver.page_source, 'html.parser')
+        return BS(self.driver.page_source, 'html.parser')
     
     def debugPage(self, source="pageSourceCH1.html"):
         return BS(open(source, encoding="utf-8"), 'html.parser')
@@ -70,7 +73,7 @@ class Exam:
                 d[question] = getMultChoice(block)
             # My hope is that this acts as a catch all for questions that can't be answered with this program (i.e short answer)
             else:
-                log("Question type error on question " + count)
+                self.log("Question type error on question " + count)
             count += 1
         return d
         
@@ -97,5 +100,3 @@ print(test1.questionTotal)
 print(Exam.questionTotal)
 
 #note to self to fix logs, maybe define logs in the init funcition, then use self.logs?
-
-
